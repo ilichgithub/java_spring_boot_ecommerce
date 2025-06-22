@@ -32,8 +32,19 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public void delete(long id) {
-        iCategoryRepository.deleteById(id);
+    public Category update(long id, Category category) {
+        Category cat = iCategoryRepository.findById(id).orElseThrow(()-> new RuntimeException("No existe id: "+id));
+        return iCategoryRepository.save(category);
+    }
+
+
+    @Override
+    public boolean delete(long id) {
+        if (iCategoryRepository.existsById(id)) {
+            iCategoryRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

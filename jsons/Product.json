@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Smartphone Galaxy S24",
+    "description": "Último modelo de smartphone con cámara de 200MP y procesador de alta velocidad.",
+    "price": 1200.00,
+    "stockQuantity": 150,
+    "imageUrl": "https://example.com/images/galaxy_s24.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Laptop XPS 15",
+    "description": "Potente laptop con pantalla OLED de 15 pulgadas, ideal para diseño gráfico y gaming.",
+    "price": 1800.50,
+    "stockQuantity": 80,
+    "imageUrl": "https://example.com/images/xps_15.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Smart TV OLED 65\"",
+    "description": "Televisor inteligente de 65 pulgadas con tecnología OLED para colores vibrantes y negros puros.",
+    "price": 1500.00,
+    "stockQuantity": 50,
+    "imageUrl": "https://example.com/images/oled_tv_65.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Auriculares Cancelación Ruido Sony WH-1000XM5",
+    "description": "Auriculares premium con la mejor cancelación de ruido y sonido de alta resolución.",
+    "price": 350.99,
+    "stockQuantity": 200,
+    "imageUrl": "https://example.com/images/sony_xm5.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Smartwatch Ultra Pro",
+    "description": "Reloj inteligente con GPS, monitor de ritmo cardíaco y batería de larga duración.",
+    "price": 299.99,
+    "stockQuantity": 120,
+    "imageUrl": "https://example.com/images/smartwatch_ultra.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Tablet Pro Max 11\"",
+    "description": "Tablet de 11 pulgadas con chip potente, ideal para productividad y entretenimiento.",
+    "price": 799.00,
+    "stockQuantity": 90,
+    "imageUrl": "https://example.com/images/tablet_pro_max.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Consola de Videojuegos NextGen",
+    "description": "La consola más reciente con gráficos 4K y almacenamiento SSD ultrarrápido.",
+    "price": 500.00,
+    "stockQuantity": 70,
+    "imageUrl": "https://example.com/images/console_nextgen.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Altavoz Inteligente Echo Voice 5",
+    "description": "Asistente de voz inteligente con sonido mejorado y pantalla táctil.",
+    "price": 99.99,
+    "stockQuantity": 300,
+    "imageUrl": "https://example.com/images/echo_voice_5.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Cámara Mirrorless Alpha Z7",
+    "description": "Cámara profesional sin espejo con sensor full-frame y grabación de video 8K.",
+    "price": 2500.00,
+    "stockQuantity": 30,
+    "imageUrl": "https://example.com/images/alpha_z7.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Router Wi-Fi 6 Mesh System",
+    "description": "Sistema de red Wi-Fi en malla para cobertura total y alta velocidad en el hogar.",
+    "price": 180.00,
+    "stockQuantity": 100,
+    "imageUrl": "https://example.com/images/wifi6_mesh.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Impresora Multifuncional LaserJet",
+    "description": "Impresora láser todo-en-uno, ideal para oficina en casa o pequeñas empresas.",
+    "price": 250.00,
+    "stockQuantity": 60,
+    "imageUrl": "https://example.com/images/laserjet_mfp.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Drone Plegable Mavic Mini 4",
+    "description": "Drone compacto y ligero con cámara 4K y modos de vuelo inteligentes.",
+    "price": 750.00,
+    "stockQuantity": 40,
+    "imageUrl": "https://example.com/images/mavic_mini_4.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Monitor Curvo Gaming 27\"",
+    "description": "Monitor de 27 pulgadas con alta tasa de refresco y baja latencia para gaming inmersivo.",
+    "price": 400.00,
+    "stockQuantity": 75,
+    "imageUrl": "https://example.com/images/gaming_monitor.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Teclado Mecánico RGB",
+    "description": "Teclado mecánico retroiluminado RGB con switches táctiles para una experiencia de escritura superior.",
+    "price": 120.00,
+    "stockQuantity": 180,
+    "imageUrl": "https://example.com/images/rgb_keyboard.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Ratón Gaming Inalámbrico",
+    "description": "Ratón inalámbrico de alta precisión con sensores personalizables, diseñado para gamers.",
+    "price": 70.00,
+    "stockQuantity": 250,
+    "imageUrl": "https://example.com/images/wireless_gaming_mouse.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Batería Externa PowerBank 20000mAh",
+    "description": "Cargador portátil de alta capacidad para múltiples dispositivos, con carga rápida.",
+    "price": 45.00,
+    "stockQuantity": 400,
+    "imageUrl": "https://example.com/images/powerbank_20k.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Reproductor Multimedia Streaming 4K",
+    "description": "Dispositivo para transmitir contenido en 4K UHD desde tus servicios favoritos.",
+    "price": 80.00,
+    "stockQuantity": 160,
+    "imageUrl": "https://example.com/images/4k_streamer.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Sistema de Sonido Home Theater 5.1",
+    "description": "Sistema de altavoces 5.1 para una experiencia de cine en casa inmersiva.",
+    "price": 600.00,
+    "stockQuantity": 35,
+    "imageUrl": "https://example.com/images/home_theater_51.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Webcam Full HD con Micrófono",
+    "description": "Cámara web de alta definición con micrófono integrado, ideal para videollamadas y streaming.",
+    "price": 55.00,
+    "stockQuantity": 220,
+    "imageUrl": "https://example.com/images/webcam_fullhd.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  },
+  {
+    "name": "Disco Duro Externo SSD 1TB",
+    "description": "Unidad de estado sólido externa de 1TB para almacenamiento rápido y portátil de datos.",
+    "price": 130.00,
+    "stockQuantity": 190,
+    "imageUrl": "https://example.com/images/ssd_external_1tb.jpg",
+    "categoryDTO": {
+      "id": 1
+    }
+  }
+]

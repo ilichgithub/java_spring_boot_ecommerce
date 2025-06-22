@@ -13,6 +13,8 @@ public interface IProductService {
 
     public Product save(Product category);
 
-    public void delete(long id);
+    public Product update(long id, Product product);
+
+    public boolean delete(long id);
 
 }

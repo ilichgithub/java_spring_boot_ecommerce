@@ -11,8 +11,10 @@ public interface ICategoryService {
 
     public Optional<Category> getById(long id);
 
+    public Category update(long id, Category category);
+
     public Category save(Category category);
 
-    public void delete(long id);
+    public boolean delete(long id);
 
 }

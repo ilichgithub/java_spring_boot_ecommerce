@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Electrónica",
+    "description": "Dispositivos y gadgets electrónicos de consumo, incluyendo smartphones, laptops y televisores."
+  },
+  {
+    "name": "Ropa y Accesorios",
+    "description": "Artículos de vestir, calzado y accesorios de moda para hombres, mujeres y niños."
+  },
+  {
+    "name": "Hogar y Cocina",
+    "description": "Artículos para el hogar, utensilios de cocina, electrodomésticos y decoración."
+  },
+  {
+    "name": "Libros",
+    "description": "Obras literarias, libros de texto, novelas y publicaciones de no ficción."
+  },
+  {
+    "name": "Deportes y Aire Libre",
+    "description": "Equipamiento deportivo, ropa, calzado y accesorios para actividades al aire libre."
+  },
+  {
+    "name": "Salud y Cuidado Personal",
+    "description": "Productos de belleza, higiene, suplementos y artículos para el bienestar."
+  },
+  {
+    "name": "Juguetes y Juegos",
+    "description": "Juguetes para todas las edades, juegos de mesa, rompecabezas y videojuegos."
+  },
+  {
+    "name": "Automotriz",
+    "description": "Accesorios para vehículos, repuestos, herramientas y productos de mantenimiento automotriz."
+  },
+  {
+    "name": "Bebés y Niños",
+    "description": "Artículos esenciales para bebés, ropa infantil, pañales y productos de alimentación."
+  },
+  {
+    "name": "Mascotas",
+    "description": "Alimentos, juguetes, accesorios y productos de cuidado para animales domésticos."
+  },
+  {
+    "name": "Jardín y Bricolaje",
+    "description": "Herramientas de jardinería, plantas, semillas, y materiales para proyectos de mejora del hogar."
+  },
+  {
+    "name": "Arte y Manualidades",
+    "description": "Materiales de arte, kits de manualidades, hilos y accesorios para proyectos creativos."
+  },
+  {
+    "name": "Alimentos y Bebidas",
+    "description": "Productos comestibles, bebidas no alcohólicas, snacks y artículos gourmet."
+  },
+  {
+    "name": "Música e Instrumentos",
+    "description": "Instrumentos musicales, accesorios, partituras y equipos de audio."
+  },
+  {
+    "name": "Películas y Series TV",
+    "description": "Películas en formato físico y digital, y colecciones de series de televisión."
+  },
+  {
+    "name": "Software",
+    "description": "Programas informáticos, sistemas operativos, suites de oficina y software especializado."
+  },
+  {
+    "name": "Joyas",
+    "description": "Anillos, collares, pulseras, pendientes y otras piezas de joyería fina."
+  },
+  {
+    "name": "Maletas y Bolsos",
+    "description": "Equipaje de viaje, mochilas, bolsos de mano y accesorios de viaje."
+  },
+  {
+    "name": "Papelería y Oficina",
+    "description": "Suministros de oficina, cuadernos, bolígrafos, impresoras y material de papelería."
+  },
+  {
+    "name": "Videojuegos",
+    "description": "Consolas, juegos y accesorios para todas las plataformas de videojuegos."
+  }
+]
