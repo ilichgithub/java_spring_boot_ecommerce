@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ilich.sb.e_commerce.model.Category;
 import com.ilich.sb.e_commerce.model.Product;
 import com.ilich.sb.e_commerce.repository.IProductRepository;
 import com.ilich.sb.e_commerce.service.IProductService;
