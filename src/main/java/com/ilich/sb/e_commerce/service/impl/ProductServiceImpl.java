@@ -32,8 +32,18 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public void delete(long id) {
-        iProductRepository.deleteById(id);
+    public Product update(long id, Product product) {
+        Product pro = iProductRepository.findById(id).orElseThrow(()-> new RuntimeException("No existe id: "+id));
+        return iProductRepository.save(product);
+    }
+
+    @Override
+    public boolean delete(long id) {
+        if (iProductRepository.existsById(id)) {
+            iProductRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

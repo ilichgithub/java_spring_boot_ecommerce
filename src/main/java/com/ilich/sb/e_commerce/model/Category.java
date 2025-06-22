@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.ilich.sb.e_commerce.dto.CategoryDTO;
 
 @Data
 @NoArgsConstructor
@@ -22,11 +25,21 @@ public class Category {
     @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT") // Usa TEXT para descripciones largas
+    @Column(name = "description") // Usa TEXT para descripciones largas
     private String description;
     
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Product> products = new ArrayList<>();
+
+    public Category(CategoryDTO categoryDTO) {
+        this.id = categoryDTO.getId();
+        this.name = categoryDTO.getName();
+        this.description = categoryDTO.getDescription();
+    }
+
+    
+    
 
 
 }

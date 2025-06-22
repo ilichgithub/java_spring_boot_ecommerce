@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ilich.sb.e_commerce.dto.ProductDTO;
 
 @Data
 @NoArgsConstructor
@@ -37,8 +37,9 @@ public class Product {
     private String imageUrl;
     
     // Relación Many-to-One con Category
-    @ManyToOne(fetch = FetchType.LAZY) // Carga perezosa, solo se carga Category cuando se necesita
+    @ManyToOne() // Carga perezosa, solo se carga Category cuando se necesita fetch = FetchType.LAZY
     @JoinColumn(name = "category_id", nullable = false) // FK en la tabla 'product'
+    @JsonManagedReference
     private Category category;
     
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -67,6 +68,17 @@ public class Product {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
+    public Product(ProductDTO productDTO){
+        this.id = productDTO.getId();
+        this.name = productDTO.getName();
+        this.description = productDTO.getDescription();
+        this.price = productDTO.getPrice();
+        this.stockQuantity = productDTO.getStockQuantity();
+        this.imageUrl = productDTO.getImageUrl();
+        this.category = new Category(productDTO.getCategoryDTO());
+    }
+    
 
 
 }
