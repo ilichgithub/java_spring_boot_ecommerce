@@ -1,9 +1,7 @@
 package com.ilich.sb.e_commerce.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ilich.sb.e_commerce.dto.CategoryDTO;
-import com.ilich.sb.e_commerce.model.Category;
+import com.ilich.sb.e_commerce.mapper.ICategoryMapper;
 import com.ilich.sb.e_commerce.service.ICategoryService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,9 +23,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping("/api/category")
 public class CategoryRestController {
+    
+    private final ICategoryService iCategoryServ;
+    private final ICategoryMapper categoryMapper;
 
-    @Autowired
-    private ICategoryService iCategoryServ;
+    CategoryRestController(ICategoryService iCategoryServ, ICategoryMapper categoryMapper){
+        this.iCategoryServ = iCategoryServ;
+        this.categoryMapper = categoryMapper;
+    }
+
 
     /**
      * Obtener todas las categorias.
@@ -39,8 +43,7 @@ public class CategoryRestController {
     @GetMapping(path = "/getAll", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<List<CategoryDTO>> getAll() {
         return new ResponseEntity<List<CategoryDTO>>(
-            iCategoryServ.getAll().stream()
-                .map(c -> new CategoryDTO(c)).collect(Collectors.toList()), 
+                categoryMapper.toDtoList(iCategoryServ.getAll()), 
                 HttpStatus.OK
             );
     }
@@ -55,7 +58,7 @@ public class CategoryRestController {
     @GetMapping(path="/getById/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<CategoryDTO> getById(@PathVariable Long id) {
         return iCategoryServ.getById(id)
-            .map(obj -> new ResponseEntity<CategoryDTO>(new CategoryDTO(obj), HttpStatus.OK))
+            .map(obj -> new ResponseEntity<CategoryDTO>(categoryMapper.toDto(obj), HttpStatus.OK))
             .orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     /**
@@ -70,7 +73,7 @@ public class CategoryRestController {
     @PostMapping
     public ResponseEntity<CategoryDTO> postNewCategory(@RequestBody CategoryDTO categoryDto) {
         return new ResponseEntity<CategoryDTO>(
-            new CategoryDTO(iCategoryServ.save(new Category(categoryDto))),
+            categoryMapper.toDto(iCategoryServ.save(categoryMapper.toEntity(categoryDto))),
             HttpStatus.CREATED
         );
     }
@@ -87,8 +90,8 @@ public class CategoryRestController {
     @PutMapping(path="{id}", consumes = { MediaType.APPLICATION_JSON_VALUE } )
     public ResponseEntity<CategoryDTO> putUpdateCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDto) {
         return new ResponseEntity<CategoryDTO>(
-            new CategoryDTO(iCategoryServ.update(
-                id,new Category(categoryDto))),
+            categoryMapper.toDto(iCategoryServ.update(
+                id,categoryMapper.toEntity(categoryDto))),
                 HttpStatus.OK
             );
     }

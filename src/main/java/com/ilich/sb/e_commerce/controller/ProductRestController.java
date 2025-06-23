@@ -1,9 +1,7 @@
 package com.ilich.sb.e_commerce.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ilich.sb.e_commerce.dto.ProductDTO;
+import com.ilich.sb.e_commerce.mapper.IProductMapper;
 import com.ilich.sb.e_commerce.model.Product;
 import com.ilich.sb.e_commerce.service.IProductService;
 
@@ -24,8 +23,13 @@ import com.ilich.sb.e_commerce.service.IProductService;
 @RequestMapping("/api/product")
 public class ProductRestController {
 
-    @Autowired
-    private IProductService iProductService;
+    private final IProductService iProductService;
+    private final IProductMapper productMapper;
+
+    ProductRestController(IProductService iProductService, IProductMapper productMapper){
+        this.iProductService = iProductService;
+        this.productMapper = productMapper;
+    }
 
     /**
      * Obtener todos los productos.
@@ -37,8 +41,7 @@ public class ProductRestController {
     @GetMapping("/getAll")
     public ResponseEntity<List<ProductDTO>> getAll() {
         return new ResponseEntity<List<ProductDTO>>(
-            iProductService.getAll().stream()
-                .map(c -> new ProductDTO(c)).collect(Collectors.toList()), 
+                productMapper.toDtoList(iProductService.getAll()), 
                 HttpStatus.OK
             );
     }
@@ -53,7 +56,7 @@ public class ProductRestController {
     @GetMapping("/getById/{id}")
     public ResponseEntity<ProductDTO> getById(@PathVariable Long id) {
         return iProductService.getById(id).map(
-            obj -> new ResponseEntity<ProductDTO>(new ProductDTO(obj), HttpStatus.OK))
+            obj -> new ResponseEntity<ProductDTO>(productMapper.toDto(obj), HttpStatus.OK))
             .orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     /**
@@ -68,7 +71,7 @@ public class ProductRestController {
     @PostMapping
     public ResponseEntity<ProductDTO> postNewCategory(@RequestBody ProductDTO productDto) {
         return new ResponseEntity<ProductDTO>(
-            new ProductDTO(iProductService.save(new Product(productDto))),
+            productMapper.toDto(iProductService.save(productMapper.toEntity(productDto))),
             HttpStatus.CREATED
         );
         
@@ -87,7 +90,7 @@ public class ProductRestController {
     public ResponseEntity<ProductDTO> putUpdateCategory(@PathVariable Long id, @RequestBody ProductDTO productDto) {
         Product product = new Product(productDto);
         return new ResponseEntity<ProductDTO>(
-            new ProductDTO(iProductService.update(id, product)),
+            productMapper.toDto(iProductService.update(id, product)),
             HttpStatus.OK
         );
     }
