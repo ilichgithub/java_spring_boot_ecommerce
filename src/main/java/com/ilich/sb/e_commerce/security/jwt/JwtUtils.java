@@ -1,4 +1,4 @@
-package com.ilich.sb.e_commerce.config.jwt;
+package com.ilich.sb.e_commerce.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.ilich.sb.e_commerce.config.service.UserDetailsImpl;
 import com.ilich.sb.e_commerce.repository.IRevokedTokenRepository;
+import com.ilich.sb.e_commerce.service.impl.UserDetailsImpl;
 
 import java.security.Key;
 import java.util.Date;

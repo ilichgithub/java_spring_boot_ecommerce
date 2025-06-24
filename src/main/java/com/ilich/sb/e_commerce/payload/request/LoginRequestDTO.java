@@ -1,4 +1,4 @@
-package com.ilich.sb.e_commerce.dto;
+package com.ilich.sb.e_commerce.payload.request;
 
 import jakarta.validation.constraints.NotBlank;
 

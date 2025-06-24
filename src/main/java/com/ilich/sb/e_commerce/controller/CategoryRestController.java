@@ -9,8 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ilich.sb.e_commerce.dto.CategoryDTO;
 import com.ilich.sb.e_commerce.mapper.ICategoryMapper;
+import com.ilich.sb.e_commerce.payload.CategoryDTO;
 import com.ilich.sb.e_commerce.service.ICategoryService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;

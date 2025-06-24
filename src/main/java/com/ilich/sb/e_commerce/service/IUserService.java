@@ -1,7 +1,7 @@
 package com.ilich.sb.e_commerce.service;
 
-import com.ilich.sb.e_commerce.dto.JwtResponseDTO;
 import com.ilich.sb.e_commerce.model.User;
+import com.ilich.sb.e_commerce.payload.response.JwtResponseDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 

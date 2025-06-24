@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ilich.sb.e_commerce.config.jwt.AuthTokenFilter;
+import com.ilich.sb.e_commerce.security.jwt.AuthTokenFilter;
 import com.ilich.sb.e_commerce.service.impl.UserDetailsServiceImpl;
 
 @Configuration

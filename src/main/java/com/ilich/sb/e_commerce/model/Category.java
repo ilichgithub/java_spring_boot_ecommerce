@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.ilich.sb.e_commerce.dto.CategoryDTO;
+import com.ilich.sb.e_commerce.payload.CategoryDTO;
 
 @Data
 @NoArgsConstructor
