@@ -13,4 +13,6 @@ public interface IUserService {
 
     String logoutUser(HttpServletRequest request);
 
+    JwtResponseDTO refreshToken(String requestRefreshToken);
+
 }

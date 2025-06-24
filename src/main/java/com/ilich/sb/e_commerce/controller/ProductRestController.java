@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,6 +70,7 @@ public class ProductRestController {
      * @return ResponseEntity con el Product de la operación.
      */
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<ProductDTO> postNewCategory(@RequestBody ProductDTO productDto) {
         return new ResponseEntity<ProductDTO>(
             productMapper.toDto(iProductService.save(productMapper.toEntity(productDto))),
@@ -87,6 +89,7 @@ public class ProductRestController {
      * @return ResponseEntity con el Producto de la operación.
      */
     @PutMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<ProductDTO> putUpdateCategory(@PathVariable Long id, @RequestBody ProductDTO productDto) {
         Product product = new Product(productDto);
         return new ResponseEntity<ProductDTO>(
@@ -103,6 +106,7 @@ public class ProductRestController {
      * @return ResponseEntity con el estado de la operación.
      */
     @DeleteMapping("/{id}") 
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         if (iProductService.delete(id)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

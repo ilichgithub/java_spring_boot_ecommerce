@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,6 +72,7 @@ public class CategoryRestController {
      * @return ResponseEntity con la categoria de la operación.
      */
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<CategoryDTO> postNewCategory(@RequestBody CategoryDTO categoryDto) {
         return new ResponseEntity<CategoryDTO>(
             categoryMapper.toDto(iCategoryServ.save(categoryMapper.toEntity(categoryDto))),
@@ -88,6 +90,7 @@ public class CategoryRestController {
      * @return ResponseEntity con la categoria de la operación.
      */
     @PutMapping(path="{id}", consumes = { MediaType.APPLICATION_JSON_VALUE } )
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<CategoryDTO> putUpdateCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDto) {
         return new ResponseEntity<CategoryDTO>(
             categoryMapper.toDto(iCategoryServ.update(
@@ -104,6 +107,7 @@ public class CategoryRestController {
      * @return ResponseEntity con el estado de la operación.
      */
     @DeleteMapping("/{id}") 
+    @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         if (iCategoryServ.delete(id)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
