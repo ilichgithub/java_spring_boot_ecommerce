@@ -3,14 +3,16 @@ package com.ilich.sb.e_commerce.dto;
 import java.util.List;
 
 public class JwtResponseDTO {
-    private String token;
+    private String accessToken;
+    private String refreshToken;
     private String type = "Bearer"; // Tipo de token, por convención "Bearer"
     private Long id;
     private String username;
     private List<String> roles;
 
-    public JwtResponseDTO(String accessToken, Long id, String username, List<String> roles) {
-        this.token = accessToken;
+    public JwtResponseDTO(String accessToken, String refreshToken, Long id, String username, List<String> roles) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
         this.id = id;
         this.username = username;
         this.roles = roles;
@@ -18,11 +20,20 @@ public class JwtResponseDTO {
 
     // --- Getters y Setters ---
     public String getAccessToken() {
-        return token;
+        return accessToken;
     }
 
     public void setAccessToken(String accessToken) {
-        this.token = accessToken;
+        this.accessToken = accessToken;
+    }
+
+    // --- Getters y Setters ---
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public String getTokenType() {

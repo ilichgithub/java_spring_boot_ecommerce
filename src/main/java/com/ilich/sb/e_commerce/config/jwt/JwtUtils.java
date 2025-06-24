@@ -5,7 +5,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -35,9 +34,14 @@ public class JwtUtils {
     // Genera el token JWT
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        return generateTokenFromUsername(userPrincipal.getUsername());
+    }
 
+
+    // Nuevo método para generar Access Token directamente desde un username (usado en refresh-token endpoint)
+    public String generateTokenFromUsername(String username) {
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername())) // Sujeto del token (nombre de usuario)
+                .setSubject(username)
                 .setIssuedAt(new Date()) // Fecha de emisión
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)) // Fecha de expiración
                 .signWith(key(), SignatureAlgorithm.HS512) // Firma el token con la clave secreta y algoritmo

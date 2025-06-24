@@ -1,5 +1,7 @@
 package com.ilich.sb.e_commerce.repository;
 
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,5 @@ public interface IRevokedTokenRepository extends JpaRepository<RevokedToken, Lon
 
     // Opcional: para limpiar tokens expirados de la lista negra periódicamente
     // List<RevokedToken> findByExpiryDateBefore(Date date);
+    void deleteByExpiryDateBefore(Date date);
 }
