@@ -5,8 +5,8 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.ilich.sb.e_commerce.dto.CategoryDTO;
 import com.ilich.sb.e_commerce.model.Category;
+import com.ilich.sb.e_commerce.payload.CategoryDTO;
 
 @Mapper(componentModel = "spring")
 public interface ICategoryMapper {

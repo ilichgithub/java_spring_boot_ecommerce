@@ -16,18 +16,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ilich.sb.e_commerce.config.jwt.AuthTokenFilter;
-import com.ilich.sb.e_commerce.config.jwt.JwtUtils;
-import com.ilich.sb.e_commerce.config.service.UserDetailsImpl;
-import com.ilich.sb.e_commerce.dto.JwtResponseDTO;
 import com.ilich.sb.e_commerce.exception.TokenRefreshException;
 import com.ilich.sb.e_commerce.model.RefreshToken;
 import com.ilich.sb.e_commerce.model.RevokedToken;
 import com.ilich.sb.e_commerce.model.Role;
 import com.ilich.sb.e_commerce.model.User;
+import com.ilich.sb.e_commerce.payload.response.JwtResponseDTO;
 import com.ilich.sb.e_commerce.repository.IRevokedTokenRepository;
 import com.ilich.sb.e_commerce.repository.IRoleRepository;
 import com.ilich.sb.e_commerce.repository.IUserRepository;
+import com.ilich.sb.e_commerce.security.jwt.AuthTokenFilter;
+import com.ilich.sb.e_commerce.security.jwt.JwtUtils;
 import com.ilich.sb.e_commerce.service.IRefreshTokenService;
 import com.ilich.sb.e_commerce.service.IUserService;
 

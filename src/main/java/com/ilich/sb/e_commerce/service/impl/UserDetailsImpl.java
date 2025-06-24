@@ -1,4 +1,4 @@
-package com.ilich.sb.e_commerce.config.service;
+package com.ilich.sb.e_commerce.service.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ilich.sb.e_commerce.model.User;

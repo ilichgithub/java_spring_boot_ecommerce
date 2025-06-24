@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.ilich.sb.e_commerce.config.service.UserDetailsImpl;
 import com.ilich.sb.e_commerce.model.User;
 import com.ilich.sb.e_commerce.repository.IUserRepository;
 

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.ilich.sb.e_commerce.dto.ProductDTO;
+import com.ilich.sb.e_commerce.payload.ProductDTO;
 
 @Data
 @NoArgsConstructor

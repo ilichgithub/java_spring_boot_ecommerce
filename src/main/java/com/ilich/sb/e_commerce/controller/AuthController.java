@@ -1,13 +1,12 @@
 package com.ilich.sb.e_commerce.controller;
 
-import com.ilich.sb.e_commerce.dto.JwtResponseDTO;
-import com.ilich.sb.e_commerce.dto.LoginRequestDTO;
-import com.ilich.sb.e_commerce.dto.MessageResponseDTO;
-import com.ilich.sb.e_commerce.dto.RegisterRequestDTO;
-import com.ilich.sb.e_commerce.dto.TokenRefreshRequestDTO;
-import com.ilich.sb.e_commerce.dto.TokenRefreshResponseDTO;
 import com.ilich.sb.e_commerce.model.User;
-
+import com.ilich.sb.e_commerce.payload.request.LoginRequestDTO;
+import com.ilich.sb.e_commerce.payload.request.RegisterRequestDTO;
+import com.ilich.sb.e_commerce.payload.request.TokenRefreshRequestDTO;
+import com.ilich.sb.e_commerce.payload.response.JwtResponseDTO;
+import com.ilich.sb.e_commerce.payload.response.MessageResponseDTO;
+import com.ilich.sb.e_commerce.payload.response.TokenRefreshResponseDTO;
 import com.ilich.sb.e_commerce.service.IUserService;
 
 import jakarta.servlet.http.HttpServletRequest;

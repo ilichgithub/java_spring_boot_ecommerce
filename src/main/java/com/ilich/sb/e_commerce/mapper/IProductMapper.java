@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.ilich.sb.e_commerce.dto.ProductDTO;
 import com.ilich.sb.e_commerce.model.Product;
+import com.ilich.sb.e_commerce.payload.ProductDTO;
 
 @Mapper(componentModel = "spring")
 public interface IProductMapper {

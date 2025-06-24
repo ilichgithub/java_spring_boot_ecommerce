@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ilich.sb.e_commerce.dto.ProductDTO;
 import com.ilich.sb.e_commerce.mapper.IProductMapper;
 import com.ilich.sb.e_commerce.model.Product;
+import com.ilich.sb.e_commerce.payload.ProductDTO;
 import com.ilich.sb.e_commerce.service.IProductService;
 
 
