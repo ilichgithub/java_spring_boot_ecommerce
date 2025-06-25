@@ -7,7 +7,9 @@ import org.mapstruct.factory.Mappers;
 
 import com.ilich.sb.e_commerce.model.Category;
 import com.ilich.sb.e_commerce.payload.CategoryDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 @Mapper(componentModel = "spring")
 public interface ICategoryMapper {
 

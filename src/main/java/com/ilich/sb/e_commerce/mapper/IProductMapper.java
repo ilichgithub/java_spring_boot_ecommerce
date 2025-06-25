@@ -8,7 +8,9 @@ import org.mapstruct.factory.Mappers;
 
 import com.ilich.sb.e_commerce.model.Product;
 import com.ilich.sb.e_commerce.payload.ProductDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 @Mapper(componentModel = "spring")
 public interface IProductMapper {
 
