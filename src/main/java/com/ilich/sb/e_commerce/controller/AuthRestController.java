@@ -22,14 +22,14 @@ import java.util.HashSet;
 
 @RestController
 @RequestMapping("/api/auth") // Ruta base para los endpoints de autenticación
-public class AuthController {
+public class AuthRestController {
 
     @Value("${ecommerce.app.jwt.refresh.expiration.ms}") // Duración del Refresh Token
     private Long refreshTokenDurationMs;
 
     private final IUserService iUserService;
 
-    public AuthController(IUserService iUserService) { 
+    public AuthRestController(IUserService iUserService) { 
         this.iUserService = iUserService;
     }
     
