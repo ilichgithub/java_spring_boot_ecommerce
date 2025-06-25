@@ -77,8 +77,15 @@ public class ProjectSecurity {
             )
             .authorizeHttpRequests(authorize -> authorize
                 // Permite el acceso sin autenticación a los endpoints de autenticación y registro
-                .requestMatchers("/api/auth/**").permitAll()
-                // Toda otra petición requiere autenticación
+                    .requestMatchers("/api/auth/**").permitAll()
+
+                    // ¡AÑADE ESTAS LÍNEAS PARA PERMITIR EL ACCESO A SWAGGER UI!
+                    // Estas son las rutas típicas que SpringDoc utiliza
+                    .requestMatchers("/v3/api-docs/**").permitAll()  // Para la definición OpenAPI JSON
+                    .requestMatchers("/swagger-ui/**").permitAll()    // Para los archivos estáticos de la UI
+                    .requestMatchers("/swagger-ui.html").permitAll() // La página principal de Swagger UI
+
+                    // Toda otra petición requiere autenticación
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
