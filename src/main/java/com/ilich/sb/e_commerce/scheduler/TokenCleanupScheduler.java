@@ -3,6 +3,7 @@ package com.ilich.sb.e_commerce.scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ilich.sb.e_commerce.repository.IRevokedTokenRepository;
 import com.ilich.sb.e_commerce.service.IRefreshTokenService;
@@ -28,7 +29,9 @@ public class TokenCleanupScheduler {
      * Se ejecuta cada 24 horas (ajusta el cron según necesites).
      */
     @Scheduled(cron = "0 0 0 * * ?") // Ejecuta a medianoche todos los días
-    // @Scheduled(fixedRate = 86400000) // O cada 24 horas desde el inicio de la app
+    //@Scheduled(cron = "0 */5 * * * ?") // ¡CAMBIO AQUÍ!
+    //@Scheduled(fixedRate = 86400000) // O cada 24 horas desde el inicio de la app
+    @Transactional // ¡AÑADE ESTA ANOTACIÓN!
     public void cleanupExpiredRefreshTokens() {
         logger.info("Iniciando limpieza de Refresh Tokens expirados...");
         refreshTokenService.cleanExpiredRefreshTokens();
@@ -40,6 +43,8 @@ public class TokenCleanupScheduler {
      * Se ejecuta cada 24 horas.
      */
     @Scheduled(cron = "0 30 0 * * ?") // Ejecuta 30 minutos después de medianoche
+    //@Scheduled(cron = "30 */5 * * * ?") // Ejecuta 30 segundos después de cada 5 minutos
+    @Transactional // ¡AÑADE ESTA ANOTACIÓN!
     public void cleanupExpiredRevokedAccessTokens() {
         logger.info("Iniciando limpieza de Access Tokens revocados y expirados...");
         // Implementar un método en RevokedTokenRepository para esto si no lo tienes

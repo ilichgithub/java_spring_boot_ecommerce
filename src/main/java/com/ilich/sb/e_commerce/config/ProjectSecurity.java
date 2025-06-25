@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.ilich.sb.e_commerce.security.AuthAccessDeniedHandler;
+import com.ilich.sb.e_commerce.security.jwt.AuthEntryPointJwt;
 import com.ilich.sb.e_commerce.security.jwt.AuthTokenFilter;
 import com.ilich.sb.e_commerce.service.impl.UserDetailsServiceImpl;
 
@@ -22,11 +24,18 @@ import com.ilich.sb.e_commerce.service.impl.UserDetailsServiceImpl;
 @EnableMethodSecurity
 public class ProjectSecurity {
 
-    private final UserDetailsServiceImpl userDetailsService; // Inyecta tu UserDetailsService
-
+    private final UserDetailsServiceImpl userDetailsService; 
+    private final AuthEntryPointJwt unauthorizedHandler; 
+    private final AuthAccessDeniedHandler accessDeniedHandler; 
     // Inyectar UserDetailsService a través del constructor
-    public ProjectSecurity(UserDetailsServiceImpl userDetailsService) {
+    public ProjectSecurity(
+        UserDetailsServiceImpl userDetailsService,
+        AuthEntryPointJwt unauthorizedHandler,
+        AuthAccessDeniedHandler accessDeniedHandler
+        ) {
         this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.accessDeniedHandler = accessDeniedHandler;
     }
 
     // Define AuthTokenFilter como un Bean
@@ -62,6 +71,10 @@ public class ProjectSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable()) // Deshabilita CSRF para APIs REST sin estado (ya que usaremos JWT)
+            .exceptionHandling(exception -> exception
+                .authenticationEntryPoint(unauthorizedHandler) // Configura tu handler para errores de autenticación
+                .accessDeniedHandler(accessDeniedHandler)     // Configura tu handler para errores de autorización
+            )
             .authorizeHttpRequests(authorize -> authorize
                 // Permite el acceso sin autenticación a los endpoints de autenticación y registro
                 .requestMatchers("/api/auth/**").permitAll()
