@@ -9,6 +9,11 @@ import com.ilich.sb.e_commerce.payload.response.MessageResponseDTO;
 import com.ilich.sb.e_commerce.payload.response.TokenRefreshResponseDTO;
 import com.ilich.sb.e_commerce.service.IUserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -22,6 +27,7 @@ import java.util.HashSet;
 
 @RestController
 @RequestMapping("/api/auth") // Ruta base para los endpoints de autenticación
+@Tag(name = "Auth", description = "Operaciones relacionadas a la autenticacion")
 public class AuthRestController {
 
     @Value("${ecommerce.app.jwt.refresh.expiration.ms}") // Duración del Refresh Token
@@ -32,7 +38,13 @@ public class AuthRestController {
     public AuthRestController(IUserService iUserService) { 
         this.iUserService = iUserService;
     }
-    
+
+    @Operation(summary = "Iniciar sesión de usuario", description = "Autentica a un usuario y devuelve un Access Token y Refresh Token.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Login exitoso"),
+            @ApiResponse(responseCode = "401", description = "Credenciales inválidas"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
         
@@ -57,6 +69,12 @@ public class AuthRestController {
             .body(new JwtResponseDTO(obj.getAccessToken(),"", obj.getId(), obj.getUsername(), obj.getRoles()));
     }
 
+    @Operation(summary = "Registrar nuevo usuario", description = "Registra una nueva cuenta de usuario en el sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Nombre de usuario ya en uso o solicitud inválida"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequestDTO registerRequest) {
         
@@ -77,6 +95,15 @@ public class AuthRestController {
      * @param refreshRequest El DTO que contiene el refresh token.
      * @return Nuevo Access Token y Refresh Token.
      */
+
+    @Operation(summary = "Refrescar Access Token", description = "Usa un Refresh Token válido para obtener un nuevo Access Token.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tokens refrescados exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida o refresh token ausente"),
+            @ApiResponse(responseCode = "403", description = "Refresh token expirado o no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequestDTO refreshRequest) {
 
@@ -102,6 +129,15 @@ public class AuthRestController {
      * @param request La petición HTTP, usada para extraer el token JWT.
      * @return ResponseEntity con un mensaje de éxito.
      */
+
+    @Operation(summary = "Cerrar sesión de usuario", description = "Invalida el Access Token actual y el Refresh Token asociado, cerrando la sesión del usuario.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Logout exitoso"),
+            @ApiResponse(responseCode = "400", description = "Token no proporcionado o ya expirado"),
+            @ApiResponse(responseCode = "401", description = "No autenticado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser(HttpServletRequest request) {
         String response = iUserService.logoutUser(request);

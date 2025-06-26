@@ -2,6 +2,11 @@ package com.ilich.sb.e_commerce.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +28,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/category")
+@Tag(name = "Categories", description = "Operaciones relacionadas con la gestión de Categorias") // Agrega una etiqueta para agrupar endpoints
 public class CategoryRestController {
     
     private final ICategoryService iCategoryServ;
@@ -41,6 +47,11 @@ public class CategoryRestController {
      *
      * @return ResponseEntity con la lista de categorias.
      */
+    @Operation(summary = "Obtener todos las categorias", description = "Lista todas las categorias disponibles en el catálogo.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de categorias obtenida exitosamente"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @GetMapping(path = "/getAll", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<List<CategoryDTO>> getAll() {
         return new ResponseEntity<List<CategoryDTO>>(
@@ -56,6 +67,12 @@ public class CategoryRestController {
      * @param id El ID del recurso a buscar.
      * @return ResponseEntity con la categoria de la operación.
      */
+    @Operation(summary = "Obtener categoria por ID", description = "Obtiene los detalles de una categoria específico por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "categoria encontrada exitosamente"),
+            @ApiResponse(responseCode = "404", description = "categoria no encontrada"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @GetMapping(path="/getById/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<CategoryDTO> getById(@PathVariable Long id) {
         return iCategoryServ.getById(id)
@@ -71,6 +88,15 @@ public class CategoryRestController {
      *
      * @return ResponseEntity con la categoria de la operación.
      */
+    @Operation(summary = "Crear una nueva categoria", description = "Permite a un administrador crear una nueva categoria en el catálogo.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "categoria creada exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida"),
+            @ApiResponse(responseCode = "401", description = "No autenticado"),
+            @ApiResponse(responseCode = "403", description = "Acceso denegado (solo ADMIN)"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<CategoryDTO> postNewCategory(@RequestBody CategoryDTO categoryDto) {
@@ -89,6 +115,16 @@ public class CategoryRestController {
      * @param id El ID del recurso a actualizar.
      * @return ResponseEntity con la categoria de la operación.
      */
+    @Operation(summary = "Actualizar una categoria existente", description = "Permite a un administrador actualizar los detalles de una categoria por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "categoria actualizada exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida"),
+            @ApiResponse(responseCode = "401", description = "No autenticado"),
+            @ApiResponse(responseCode = "403", description = "Acceso denegado (solo ADMIN)"),
+            @ApiResponse(responseCode = "404", description = "categoria no encontrada"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping(path="{id}", consumes = { MediaType.APPLICATION_JSON_VALUE } )
     @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<CategoryDTO> putUpdateCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDto) {
@@ -106,6 +142,15 @@ public class CategoryRestController {
      * @param id El ID del recurso a eliminar.
      * @return ResponseEntity con el estado de la operación.
      */
+    @Operation(summary = "Eliminar una categoria", description = "Permite a un administrador eliminar una categoria por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "categoria eliminada exitosamente"),
+            @ApiResponse(responseCode = "401", description = "No autenticado"),
+            @ApiResponse(responseCode = "403", description = "Acceso denegado (solo ADMIN)"),
+            @ApiResponse(responseCode = "404", description = "categoria no encontrada"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}") 
     @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
