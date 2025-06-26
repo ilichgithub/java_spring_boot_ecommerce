@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Configuration;
                 description = "Documentación de la API de E-commerce con Spring Boot y JWT para la gestión de productos, categorías y autenticación de usuarios.",
                 termsOfService = "http://swagger.io/terms/",
                 contact = @Contact(
-                        name = "Tu Nombre",
-                        email = "tu.email@example.com"
+                        name = "Ilich Rondon",
+                        email = "ilichrondon@gmail.com"
                 ),
                 license = @License(
                         name = "Apache 2.0",
