@@ -2,11 +2,13 @@ package com.ilich.sb.e_commerce.controller;
 
 import java.util.List;
 
+import com.ilich.sb.e_commerce.model.Category;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,7 @@ public class CategoryRestController {
     
     private final ICategoryService iCategoryServ;
     private final ICategoryMapper categoryMapper;
-
+    @Autowired
     CategoryRestController(ICategoryService iCategoryServ, ICategoryMapper categoryMapper){
         this.iCategoryServ = iCategoryServ;
         this.categoryMapper = categoryMapper;
@@ -128,10 +130,10 @@ public class CategoryRestController {
     @PutMapping(path="{id}", consumes = { MediaType.APPLICATION_JSON_VALUE } )
     @PreAuthorize("hasRole('ADMIN')") 
     public ResponseEntity<CategoryDTO> putUpdateCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDto) {
+        Category category = iCategoryServ.update(id, categoryMapper.toEntity(categoryDto));
         return new ResponseEntity<CategoryDTO>(
-            categoryMapper.toDto(iCategoryServ.update(
-                id,categoryMapper.toEntity(categoryDto))),
-                HttpStatus.OK
+            categoryMapper.toDto(category),
+                category == null ? HttpStatus.NOT_FOUND : HttpStatus.OK
             );
     }
     /**

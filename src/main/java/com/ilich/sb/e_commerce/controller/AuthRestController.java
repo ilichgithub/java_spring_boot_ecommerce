@@ -66,7 +66,7 @@ public class AuthRestController {
         // Envía el Access Token en el cuerpo y el Refresh Token en la cookie
         return ResponseEntity.ok()
             .header(HttpHeaders.SET_COOKIE, jwtRefreshCookie.toString())
-            .body(new JwtResponseDTO(obj.getAccessToken(),"", obj.getId(), obj.getUsername(), obj.getRoles()));
+            .body(new JwtResponseDTO(obj.getAccessToken(),obj.getRefreshToken(), obj.getId(), obj.getUsername(), obj.getRoles()));
     }
 
     @Operation(summary = "Registrar nuevo usuario", description = "Registra una nueva cuenta de usuario en el sistema.")
@@ -80,13 +80,12 @@ public class AuthRestController {
         
         User user = new User(registerRequest.getUsername(),
                              registerRequest.getPassword(), 
-                             new HashSet<>()); 
+                             new HashSet<>());
 
-        return ResponseEntity.ok(
-            new MessageResponseDTO(
-                iUserService.registerUser(user)
-            )
-        );
+        String response = iUserService.registerUser(user);
+        return response.toUpperCase().contains("ERROR") ?
+                ResponseEntity.badRequest().body(new MessageResponseDTO(response)) :
+                ResponseEntity.ok(new MessageResponseDTO(response));
     }
 
     /**
@@ -103,7 +102,6 @@ public class AuthRestController {
             @ApiResponse(responseCode = "403", description = "Refresh token expirado o no encontrado"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequestDTO refreshRequest) {
 

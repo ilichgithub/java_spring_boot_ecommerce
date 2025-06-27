@@ -10,6 +10,11 @@ public class LoginRequestDTO {
     @NotBlank(message = "La contraseña es obligatoria.")
     private String password;
 
+    public LoginRequestDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }

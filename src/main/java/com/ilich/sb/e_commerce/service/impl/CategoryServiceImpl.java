@@ -13,8 +13,12 @@ import com.ilich.sb.e_commerce.service.ICategoryService;
 @Service
 public class CategoryServiceImpl implements ICategoryService {
 
+    private final ICategoryRepository iCategoryRepository;
+
     @Autowired
-    private ICategoryRepository iCategoryRepository;
+    public CategoryServiceImpl(ICategoryRepository iCategoryRepository) {
+        this.iCategoryRepository = iCategoryRepository;
+    }
 
     @Override
     public List<Category> getAll() {
@@ -33,8 +37,9 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public Category update(long id, Category category) {
-        Category cat = iCategoryRepository.findById(id).orElseThrow(()-> new RuntimeException("No existe id: "+id));
-        return iCategoryRepository.save(category);
+        Optional<Category> cat = iCategoryRepository.findById(id);
+            //.orElseThrow(()-> new RuntimeException("No existe id: "+id));
+        return cat.isPresent() ? iCategoryRepository.save(category) : null;
     }
 
 
@@ -45,6 +50,11 @@ public class CategoryServiceImpl implements ICategoryService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return iCategoryRepository.existsById(id);
     }
 
 }

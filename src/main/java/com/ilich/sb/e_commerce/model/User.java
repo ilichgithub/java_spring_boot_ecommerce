@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 
 
 @Entity
-@Table(name = "user") // Renombra si ya tienes una tabla 'user'
+@Table(name = "users",uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username")
+}) // Renombra si ya tienes una tabla 'user'
 public class User implements UserDetails {
 
     @Id
@@ -45,6 +47,11 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
         this.roles = roles;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     // --- Getters y Setters ---
