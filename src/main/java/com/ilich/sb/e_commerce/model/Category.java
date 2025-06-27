@@ -38,8 +38,8 @@ public class Category {
         this.description = categoryDTO.getDescription();
     }
 
-    
-    
 
-
+    public Category(String name) {
+        this.name = name;
+    }
 }

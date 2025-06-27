@@ -5,6 +5,8 @@ public class TokenRefreshResponseDTO {
     private String refreshToken;
     private String tokenType = "Bearer";
 
+    public TokenRefreshResponseDTO() {
+    }
     public TokenRefreshResponseDTO(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;

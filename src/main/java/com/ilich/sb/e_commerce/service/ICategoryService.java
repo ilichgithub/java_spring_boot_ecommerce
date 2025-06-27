@@ -17,4 +17,6 @@ public interface ICategoryService {
 
     public boolean delete(long id);
 
+    public boolean existsById(Long id);
+
 }
