@@ -78,6 +78,15 @@ public class Product {
         this.imageUrl = productDTO.getImageUrl();
         this.category = new Category(productDTO.getCategoryDTO());
     }
+
+    public Product(String name, String description, BigDecimal price, int stockQuantity, Category category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.category = category;
+
+    }
     
 
 
