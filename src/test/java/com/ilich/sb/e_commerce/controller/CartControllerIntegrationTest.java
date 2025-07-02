@@ -66,6 +66,9 @@ public class CartControllerIntegrationTest {
     @Autowired
     private ICartItemRepository cartItemRepository; // Para limpiar y verificar la BD
 
+    @Autowired
+    private IRefreshTokenRepository refreshTokenRepository; // Para interactuar con la BD de roles
+
     @Autowired // Inyecta los mocks en una instancia real de CartServiceImpl
     private CartServiceImpl cartService; // Asegúrate de que coincida con tu implementación
 
@@ -79,11 +82,12 @@ public class CartControllerIntegrationTest {
     @BeforeEach
     void setUp() {
         // Limpiar la base de datos de prueba antes de cada test para asegurar un estado limpio
-        cartItemRepository.deleteAll();
-        cartRepository.deleteAll();
-        productRepository.deleteAll();
-        categoryRepository.deleteAll();
-        userRepository.deleteAll();
+        cartItemRepository.deleteAllInBatch();
+        cartRepository.deleteAllInBatch();
+        productRepository.deleteAllInBatch();
+        categoryRepository.deleteAllInBatch();
+        refreshTokenRepository.deleteAllInBatch();
+        userRepository.deleteAllInBatch();
 
         // 1. Crear y guardar un usuario de prueba (ROLE_USER)
         testUser = new User( "testuser", encoder.encode("password123"));
