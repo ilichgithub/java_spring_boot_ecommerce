@@ -214,13 +214,12 @@ public class AuthIntegrationTest {
         assertNotEquals(initialRefreshToken, newRefreshToken, "El Refresh Token debería ser diferente después de la rotación.");
 
         // Opcional: Verifica que el nuevo access token NO sea el mismo que el inicial
-        //assertNotEquals(initialAccessToken, newAccessToken, "El Access Token debería ser diferente después de la rotación.");
+        assertNotEquals(initialAccessToken, newAccessToken, "El Access Token debería ser diferente después de la rotación.");
 
         // Opcional: Puedes verificar que el refresh token inicial haya sido invalidado si tu servicio lo hace
-        // assertTrue(refreshTokenService.findByToken(initialRefreshToken).isEmpty(), "El refresh token inicial debería haber sido invalidado.");
+        assertTrue(refreshTokenService.findByToken(initialRefreshToken).isEmpty(), "El refresh token inicial debería haber sido invalidado.");
         // O: assertFalse(refreshTokenRepository.existsByToken(initialRefreshToken)); // Si no tienes el servicio
     }
-    /*
     @Test
     void testRefreshTokenNotFound() throws Exception {
         TokenRefreshRequestDTO refreshRequest = new TokenRefreshRequestDTO();
@@ -262,24 +261,4 @@ public class AuthIntegrationTest {
                 .andExpect(status().isForbidden()) // O 401 Unauthorized, dependiendo de cómo manejes TokenRefreshException
                 .andExpect(jsonPath("$.message", notNullValue())); // Verifica que haya un mensaje de error
     }
-    @Test
-    void testRegisterUserWithInvalidRole() throws Exception {
-        SignupRequest signupRequest = new SignupRequest();
-        signupRequest.setUsername("anotheruser");
-        signupRequest.setPassword("securepass");
-        signupRequest.setEmail("another@example.com");
-        signupRequest.setRole(Collections.singleton("invalid_role")); // Rol que no existe
-
-        // Asumiendo que tu lógica de registro lanza una RuntimeException o similar
-        // si el rol no se encuentra (como en el ejemplo de AuthController),
-        // esto podría resultar en un 500 Internal Server Error,
-        // a menos que tengas un manejo de excepciones más granular.
-        mockMvc.perform(post("/api/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(signupRequest)))
-                .andExpect(status().is5xxServerError()); // Puede ser 500 si la excepción no se maneja
-        // o un 400 si la validación falla antes.
-    }
-
-     */
 }

@@ -14,6 +14,7 @@ import com.ilich.sb.e_commerce.service.impl.UserDetailsImpl;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 @Component // Marca como un componente de Spring
 public class JwtUtils {
@@ -44,6 +45,7 @@ public class JwtUtils {
                 .setSubject(username)
                 .setIssuedAt(new Date()) // Fecha de emisión
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)) // Fecha de expiración
+                .claim("jti", UUID.randomUUID().toString()) // Añade un JWT ID (JTI) único
                 .signWith(key(), SignatureAlgorithm.HS512) // Firma el token con la clave secreta y algoritmo
                 .compact(); // Compacta el token en una cadena JWT
     }
