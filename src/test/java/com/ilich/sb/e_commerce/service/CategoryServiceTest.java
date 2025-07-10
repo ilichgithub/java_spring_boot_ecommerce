@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*; // Para aserciones
-        import static org.mockito.Mockito.*;             // Para métodos de Mockito (when, verify)
+import static org.mockito.Mockito.*;             // Para métodos de Mockito (when, verify)
 
 @ExtendWith(MockitoExtension.class) // Habilita Mockito para JUnit 5
 public class CategoryServiceTest {

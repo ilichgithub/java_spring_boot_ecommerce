@@ -76,7 +76,7 @@ public class ProjectSecurity {
                 .accessDeniedHandler(accessDeniedHandler)     // Configura tu handler para errores de autorización
             )
             .authorizeHttpRequests(authorize -> authorize
-                // Permite el acceso sin autenticación a los endpoints de autenticación y registro
+                    // Permite el acceso sin autenticación a los endpoints de autenticación y registro
                     .requestMatchers("/api/auth/**").permitAll()
 
                     // ¡AÑADE ESTAS LÍNEAS PARA PERMITIR EL ACCESO A SWAGGER UI!
@@ -86,7 +86,7 @@ public class ProjectSecurity {
                     .requestMatchers("/swagger-ui.html").permitAll() // La página principal de Swagger UI
 
                     // Toda otra petición requiere autenticación
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
                 // Hace que la aplicación sea sin estado (cada petición incluye el token JWT)
@@ -98,6 +98,4 @@ public class ProjectSecurity {
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-
 }
