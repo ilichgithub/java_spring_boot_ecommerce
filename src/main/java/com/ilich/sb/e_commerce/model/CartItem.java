@@ -34,6 +34,12 @@ public class CartItem {
         this.product = product;
         this.quantity = quantity;
     }
+    public CartItem(Long id, Cart cart, Product product, Integer quantity) {
+        this.id = id;
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+    }
 
     // Getters y Setters
     public Long getId() {

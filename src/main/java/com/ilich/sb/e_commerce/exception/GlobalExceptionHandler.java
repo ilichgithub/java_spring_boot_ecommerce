@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.UNAUTHORIZED.value()); // o HttpStatus.NOT_FOUND si prefieres
         body.put("error", "Unauthorized"); // o "Not Found"
-        body.put("message", ex.getMessage().concat(" UsernameNotFoundException")); // Usa el mensaje de la excepción: "User Not Found with username: ..."
+        body.put("message", ex.getMessage()); // Usa el mensaje de la excepción: "User Not Found with username: ..."
         body.put("path", request.getDescription(false).replace("uri=", ""));
 
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED); // Retorna 401
@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.BAD_REQUEST.value());
         body.put("error", "Bad Request");
-        body.put("message", "Validation failed".concat(" MethodArgumentNotValidException")); // Mensaje general
+        body.put("message", "Validation failed"); // Mensaje general
         body.put("details", errors); // Detalles específicos de los errores de campo
         body.put("path", request.getDescription(false).replace("uri=", ""));
 
@@ -92,16 +92,22 @@ public class GlobalExceptionHandler {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.NOT_FOUND.value()); // O HttpStatus.BAD_REQUEST, según la naturaleza
         body.put("error", "Not Found"); // O "Bad Request"
-        body.put("message", ex.getMessage().concat("RuntimeException ")); // Usa el mensaje de tu RuntimeException
+        body.put("message", ex.getMessage()); // Usa el mensaje de tu RuntimeException
         body.put("path", request.getDescription(false).replace("uri=", ""));
 
         // Decide el HttpStatus basado en el mensaje o si creas excepciones personalizadas
         if (ex.getMessage().contains("not found")) {
             return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-        } else if (ex.getMessage().contains("Quantity must be positive.")) { // Captura esta específica del CartService
+        } else if (ex.getMessage().contains("Quantity must be positive.")
+                || ex.getMessage().contains("Not enough stock for product")
+                || ex.getMessage().contains("Cannot create an order from an empty cart.")
+        ) { // Captura esta específica del CartService
             body.put("status", HttpStatus.BAD_REQUEST.value());
             body.put("error", "Bad Request");
             return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        } else if (ex.getMessage().contains("Access Denied")) {
+            body.put("status", HttpStatus.UNAUTHORIZED.value());
+            return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
         }
 
         // Si no coincide con ninguna condición específica, devolver 500 o un 400 genérico

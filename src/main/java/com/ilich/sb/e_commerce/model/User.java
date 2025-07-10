@@ -3,10 +3,6 @@ package com.ilich.sb.e_commerce.model;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-// Implementar UserDetails es una práctica común para integrar con Spring Security
-// aunque no es estrictamente obligatorio si usas un servicio de usuario personalizado
-// pero lo haremos aquí para simplificar.
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,6 +37,12 @@ public class User implements UserDetails {
 
     // --- Constructor sin argumentos (requerido por JPA) ---
     public User() {}
+
+    public User(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
 
     // --- Constructor con argumentos ---
     public User(String username, String password, Set<Role> roles) {
@@ -104,119 +106,3 @@ public class User implements UserDetails {
         return id != null ? id.hashCode() : 0;
     }
 }
-
-/*
-
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
-@Table(name = "user") // Nombre de la tabla en minúsculas y singular
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "username", nullable = false, unique = true, length = 50)
-    private String username;
-
-    @Column(name = "password_hash", nullable = false, length = 255)
-    private String passwordHash;
-
-    @Column(name = "email", nullable = false, unique = true, length = 100)
-    private String email;
-
-    @Column(name = "first_name", length = 50)
-    private String firstName;
-
-    @Column(name = "last_name", length = 50)
-    private String lastName;
-
-    @Column(name = "address", length = 255)
-    private String address;
-
-    @Column(name = "phone_number", length = 20)
-    private String phoneNumber;
-
-    @Column(name = "role", nullable = false, length = 20)
-    private String role; // Ej: "ROLE_USER", "ROLE_ADMIN"
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-    /* 
-    // Relación One-to-Many con Order
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
-    
-    // Constructor vacío (requerido por JPA)
-    public User() {}
-
-    // Constructor para facilidad (sin ID, created_at, updated_at)
-    public User(String username, String passwordHash, String email, String firstName, String lastName, String address, String phoneNumber, String role) {
-        this.username = username;
-        this.passwordHash = passwordHash;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
-    }
-
-    // Callbacks para manejar fechas automáticamente
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    // --- Getters y Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    // No setter para createdAt, se maneja por @PrePersist
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    // No setter para updatedAt, se maneja por @PreUpdate
-    /*
-    public Set<Order> getOrders() { return orders; }
-    public void setOrders(Set<Order> orders) { this.orders = orders; }
-
-    // Métodos de conveniencia para añadir/remover pedidos
-    public void addOrder(Order order) {
-        this.orders.add(order);
-        order.setUser(this);
-    }
-    public void removeOrder(Order order) {
-        this.orders.remove(order);
-        order.setUser(null);
-    }
-        
-}
-*/
