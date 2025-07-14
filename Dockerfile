@@ -1,5 +1,5 @@
 # --- FASE 1: BUILD ---
-FROM eclipse-temurin:21-jdk AS builder
+FROM eclipse-temurin:24-jdk AS builder
 
 # Establece el directorio de trabajo dentro del contenedor.
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN mvn clean package -DskipTests
 # --- FASE 2: PACKAGE (la imagen final) ---
 # Usa una imagen base más ligera (JRTs) para la imagen final.
 # Esto reduce drásticamente el tamaño de la imagen.
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:24-jre
 
 # Establece el directorio de trabajo para la aplicación.
 WORKDIR /app
