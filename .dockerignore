@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+
+# Maven
+target/
+.mvn/wrapper/
+.idea/
+mvnw
+mvnw.cmd
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.classpath
+.project
+.settings/
+
+# Archivos de caché y de compilación
+*.class
+.factorypath
