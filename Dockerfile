@@ -25,4 +25,4 @@ EXPOSE 8080
 
 # Comando para ejecutar la aplicación.
 # Se usa 'exec' para pasar las señales del sistema (como SIGTERM para un apagado gracioso).
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=qa"]
