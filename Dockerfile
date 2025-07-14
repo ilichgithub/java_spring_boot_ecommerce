@@ -4,12 +4,7 @@ FROM eclipse-temurin:21-jdk AS builder
 # Establece el directorio de trabajo dentro del contenedor.
 WORKDIR /app
 
-# Copia el archivo pom.xml y descarga las dependencias para aprovechar la caché de Docker.
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
-
-# Copia el resto del código fuente.
-COPY src ./src
+COPY . .
 
 # Compila y empaqueta la aplicación en un archivo JAR.
 RUN mvn clean package -DskipTests
