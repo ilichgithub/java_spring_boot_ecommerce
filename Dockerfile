@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 # Compila y empaqueta la aplicación en un archivo JAR.
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # --- FASE 2: PACKAGE (la imagen final) ---
 # Usa una imagen base más ligera (JRTs) para la imagen final.
