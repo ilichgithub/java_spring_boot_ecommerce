@@ -17,7 +17,7 @@ RUN mvn clean package -DskipTests
 # --- FASE 2: PACKAGE (la imagen final) ---
 # Usa una imagen base más ligera (JRTs) para la imagen final.
 # Esto reduce drásticamente el tamaño de la imagen.
-FROM openjdk:21-jre-slim
+FROM eclipse-temurin:21-jre-slim
 
 # Establece el directorio de trabajo para la aplicación.
 WORKDIR /app
