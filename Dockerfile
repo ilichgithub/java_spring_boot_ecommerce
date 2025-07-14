@@ -1,5 +1,5 @@
 # --- FASE 1: BUILD ---
-FROM eclipse-temurin:24-jdk AS builder
+FROM maven:3.9.10-eclipse-temurin-24 AS builder
 
 # Establece el directorio de trabajo dentro del contenedor.
 WORKDIR /app
