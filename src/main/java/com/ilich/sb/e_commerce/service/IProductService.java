@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ilich.sb.e_commerce.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IProductService {
 
@@ -16,4 +18,7 @@ public interface IProductService {
     public Product update(long id, Product product);
 
     boolean delete(Long id);
+
+    Page<Product> getAllProductsWithFilterPageable(String search, Double minPrice, Double maxPrice, Long categoryId, Pageable pageable);
+
 }
