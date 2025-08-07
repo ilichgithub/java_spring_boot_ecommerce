@@ -7,11 +7,16 @@ import java.util.Optional;
 import com.ilich.sb.e_commerce.model.Category;
 import com.ilich.sb.e_commerce.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.ilich.sb.e_commerce.model.Product;
 import com.ilich.sb.e_commerce.repository.IProductRepository;
 import com.ilich.sb.e_commerce.service.IProductService;
+
+import static com.ilich.sb.e_commerce.model.specification.ProductSpecification.*;
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -101,6 +106,25 @@ public class ProductServiceImpl implements IProductService {
         // o simplemente llamar a deleteById si tu repositorio lo soporta
         iProductRepository.deleteById(id); // O productRepository.delete(productRepository.findById(id).get());
         return true;
+    }
+
+    @Override
+    public Page<Product> getAllProductsWithFilterPageable(String search, Double minPrice, Double maxPrice, Long categoryId, Pageable pageable) {
+
+        Specification<Product> spec = Specification.where(null); // Empieza con una especificación nula
+
+        if (search != null && !search.trim().isEmpty()) {
+            spec = spec.and(hasNameLike(search).or(hasDescriptionLike(search)));
+        }
+        if (minPrice != null && maxPrice != null) {
+            spec = spec.and(priceBetween(minPrice, maxPrice));
+        }
+        if (categoryId != null) {
+            spec = spec.and(hasCategoryId(categoryId));
+        }
+
+        return iProductRepository.findAll(spec, pageable);
+
     }
 
 }
